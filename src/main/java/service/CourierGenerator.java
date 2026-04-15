@@ -1,14 +1,14 @@
 package service;
 
 import models.Courier;
-import utils.RandomGenerator;
+import static utils.TestData.faker;
 
 public class CourierGenerator {
 
     public static Courier courier(){
         return new Courier()
-                .withLogin("Potter" + RandomGenerator.randomString(3))
-                .withPassword("555")
-                .withFirstName("Garry" + RandomGenerator.randomString(3));
+                .withLogin(faker.name().username())
+                .withPassword("test")
+                .withFirstName(faker.name().firstName());
     }
 }

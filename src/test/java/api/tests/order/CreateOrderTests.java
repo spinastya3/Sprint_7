@@ -1,6 +1,7 @@
 package api.tests.order;
 
 import api.BaseTest;
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import models.Order;
@@ -12,6 +13,8 @@ import service.OrderClient;
 import service.OrderGenerator;
 
 import java.util.List;
+
+import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 @RunWith(Parameterized.class)
@@ -32,15 +35,16 @@ public class CreateOrderTests extends BaseTest {
     @Parameterized.Parameters(name = "Цвет самоката: {0}")
     public static Object[] changeColor() {
         return new Object[][]{
-                {List.of("BLACK"), 201},
-                {List.of("GREY"), 201},
-                {List.of("BLACK", "GREY"), 201},
-                {List.of(), 201}
+                {List.of("BLACK"), SC_CREATED},
+                {List.of("GREY"), SC_CREATED},
+                {List.of("BLACK", "GREY"), SC_CREATED},
+                {List.of(), SC_CREATED}
         };
     }
 
     @Test
     @DisplayName("Создать заказ для разных самокатов")
+    @Description("Параметризованный тест: Создаем заказ с различными вариантами цвета, проверяем код 201")
     public void makeNewOrderTest() {
         Order order = OrderGenerator.order().withColor(colour);
         response = orderClient.create(order);
@@ -54,7 +58,7 @@ public class CreateOrderTests extends BaseTest {
 
     @After
     public void tearDown() {
-        if (response != null && response.statusCode() == 201) {
+        if (response != null && response.statusCode() == SC_CREATED) {
             Integer track = response.path("track");
             if (track != null) {
                 response = orderClient.delete(track);

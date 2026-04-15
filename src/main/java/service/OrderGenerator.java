@@ -2,14 +2,16 @@ package service;
 
 import models.Order;
 
-public class OrderGenerator {
+import static utils.TestData.faker;
 
-    public static Order order(){
-        return new Order("Garry",
-                "Potter",
-                "Privet Drive, 4",
+public class OrderGenerator {
+    public static Order order() {
+
+        return new Order(faker.name().firstName(),
+                faker.name().lastName(),
+                faker.address().fullAddress(),
                 "4",
-                "+79991234567",
+                faker.phoneNumber().phoneNumber(),
                 5,
                 "2030-06-06",
                 "test",

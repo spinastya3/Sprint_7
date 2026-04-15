@@ -1,5 +1,12 @@
 package models;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Courier {
 
     private String login;
@@ -20,37 +27,5 @@ public class Courier {
     public Courier withFirstName(String firstName){
         this.firstName = firstName;
         return this;
-    }
-
-    public  Courier(String login, String password, String firstName){
-        this.login=login;
-        this.password=password;
-        this.firstName=firstName;
-    }
-    public Courier(){
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 }
